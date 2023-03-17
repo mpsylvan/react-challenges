@@ -8,13 +8,14 @@ import {  TaskFour } from './subcomponents/TaskFour';
 
 export const ReactChallenges = ()=>{
 
-    const [currentTask, setCurrentTask] = useState("task4");
+    const [currentTask, setCurrentTask] = useState("task1");
 
     const tasks = {
         task1: <TaskOne />,
         task2: <TaskTwo />,
         task3: <TaskThree />,
-        task4: <TaskFour />
+        task4: <TaskFour />,
+
     }
 
     const handleTaskClick = (task)=>{
