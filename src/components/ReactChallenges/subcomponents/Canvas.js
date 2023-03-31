@@ -5,21 +5,24 @@ const Canvas = ({ draw, height, width }) => {
   const canvas = useRef();
 
   const [n, setN] = useState(10);
+  const [startX, setStartX] = useState(100);
+  const [startY, setStartY] = useState(100);
+  const [endX, setendX] = useState(200);
+  const [endY, setEndY] = useState(100);
 
   useEffect(() => {
     const ctx = canvas.current.getContext("2d");
 
     ctx.clearRect(0, 0, 300, 200);
-    // context.beginPath();
-    // context.arc(50, 50, 50, 0, 2 * Math.PI);
-    // context.fill();
-    ctx.strokeRect(n, 150, n, 10);
-
     ctx.beginPath();
-    ctx.arc(100, n, 40, 0, 2 * Math.PI);
-    // ctx.fill();
+
+    ctx.arc(100, 90, 10, 0, 2 * Math.PI);
     ctx.stroke();
-  }, [n]);
+
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+  }, [startX, startY, endX, endY, n]);
 
   return (
     <>
@@ -29,8 +32,8 @@ const Canvas = ({ draw, height, width }) => {
         width={300}
         height={200}
       />
-      <button onClick={() => setN(n + 5)}>/\</button>
-      <button onClick={() => setN(n - 5)}>\/</button>
+      <button onClick={() => {}}>/\</button>
+      <button onClick={() => {}}>\/</button>
     </>
   );
 };
