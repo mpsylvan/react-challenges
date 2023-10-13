@@ -4,6 +4,7 @@ import { TaskOne } from "./subcomponents/TaskOne";
 import { TaskTwo } from "./subcomponents/TaskTwo";
 import { TaskThree } from "./subcomponents/TaskThree";
 import { TaskFour } from "./subcomponents/TaskFour";
+import { Scratch } from "./subcomponents/Scratch";
 
 export const ReactChallenges = () => {
   const [currentTask, setCurrentTask] = useState("task1");
@@ -13,6 +14,7 @@ export const ReactChallenges = () => {
     task2: <TaskTwo />,
     task3: <TaskThree />,
     task4: <TaskFour />,
+    scratch: <Scratch/>,
   };
 
   const handleTaskClick = (task) => {
@@ -84,6 +86,17 @@ export const ReactChallenges = () => {
           onClick={() => handleTaskClick("task4")}
         >
           Task 4
+        </button>
+        <button
+          style={{
+            marginRight: "100px",
+            height: "80px",
+            width: "80px",
+            background: currentTask === "scratch" ? "coral" : "white",
+          }}
+          onClick={() => handleTaskClick("scratch")}
+          >
+          Scratch
         </button>
       </div>
       <div

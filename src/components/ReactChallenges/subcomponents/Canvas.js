@@ -32,8 +32,8 @@ const Canvas = ({ draw, height, width }) => {
         width={300}
         height={200}
       />
-      <button onClick={() => {}}>/\</button>
-      <button onClick={() => {}}>\/</button>
+      <button onClick={() => {setStartX(startX+ Math.PI * 2); setendX(endX - Math.PI * 2);}} >/\</button>
+      <button onClick={() => {setStartX(startX- Math.PI * 2); setendX(endX + Math.PI * 2);}}>\/</button>
     </>
   );
 };
