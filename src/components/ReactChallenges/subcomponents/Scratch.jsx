@@ -7,7 +7,7 @@ export const Scratch = ()=>{
     
     const concepts = [
         {name: "'The' Rappers", connections : [{name:"Creator"}, {name:"Stallion"}, {name:"Dude"}, {name:"Rapper"}]},
-        {name: "'B' towns", connections : [{name:"Lagos"}, {name:"Limerick"}, {name:"Leipzig"}, {name:"Lincoln"}]},
+        {name: "'L' towns", connections : [{name:"Lagos"}, {name:"Limerick"}, {name:"Leipzig"}, {name:"Lincoln"}]},
         {name: "Beans", connections : [{name:"Kidney"}, {name:"Lima"}, {name:"Pinto"}, {name:"Fava"}]},
         {name: "Poetic structures", connections : [{name:"Meter"}, {name:"Verse"}, {name:"Line"}, {name:"Rhyme"}]}
         
@@ -20,7 +20,11 @@ export const Scratch = ()=>{
     
     for (let index = 0; index < concepts.length; index++) {
         concepts[index].connections.map((connection)=>{
-            conceptArray.push(connection.name)
+            conceptArray.push(
+                    {
+                        connection: connection.name,
+                        concept: concepts[index].name
+                    })
 
         }
         )
@@ -32,10 +36,10 @@ export const Scratch = ()=>{
     const[shuffledConcepts, setShuffledConcepts]  = useState(shuffle(conceptArray))
     
     const reshuffle = () =>{
-    let newArray = shuffle(conceptArray)
-        if (newArray)(
-            setShuffledConcepts(newArray.slice())
-        )}
+        let newArray = shuffle(conceptArray)
+            if (newArray)(
+                setShuffledConcepts(newArray.slice())
+            )}
 
     const submit = () =>{
            console.log(`submitted with an array of ${guessArray.length} guesses.`)
@@ -45,9 +49,11 @@ export const Scratch = ()=>{
            return;         
     }
 
-    // const evaluateGuess = (arr)=>{
-    //     for (let i = 0; i < guessArray.length; )
-    // }
+    const evaluateGuess = (arr)=>{
+        for (let i = 0; i < guessArray.length; i ++ ){
+            
+        }
+    }
 
     return(
         <div style={{
@@ -56,10 +62,11 @@ export const Scratch = ()=>{
             
         }}>
             {
-                shuffledConcepts.map((str)=>(
+                shuffledConcepts.map((obj)=>(
                     <Tile
-                        key={str}
-                        text_string={str}
+                        key={obj.connection}
+                        text_string={obj.connection}
+                        concept = {obj.concept}
                         guessArray = {guessArray}
                     />
                 
@@ -72,7 +79,7 @@ export const Scratch = ()=>{
     )
 }
 
-export const Tile = ({text_string, guessArray}) => {
+export const Tile = ({text_string, concept,  guessArray}) => {
 
     const [selected, setSelected] = useState(false)
     
@@ -109,11 +116,14 @@ export const Tile = ({text_string, guessArray}) => {
                 backgroundColor:  selected? "#235534" : "#333444",
                 margin: "10px",
                 display: "flex",
+                borderRadius: "3px",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                flexDirection: "column"
         }}
         >
-            {text_string}
+            <div>{text_string}</div>
+            {selected?<small>{concept}</small>: null }
         </div>
     )
 }
