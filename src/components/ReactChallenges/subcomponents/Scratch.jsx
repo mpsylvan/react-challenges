@@ -5,7 +5,6 @@ import {shuffle} from "../../../utils"
 
 export const Scratch = ()=>{
     
-    
     const concepts = [
         {name: "'The' Rappers", connections : [{name:"Creator"}, {name:"Stallion"}, {name:"Dude"}, {name:"Rapper"}]},
         {name: "'B' towns", connections : [{name:"Lagos"}, {name:"Limerick"}, {name:"Leipzig"}, {name:"Lincoln"}]},
@@ -14,6 +13,10 @@ export const Scratch = ()=>{
         
     ]
     const conceptArray =  []
+
+    const guessArray = []
+
+    const arrayOfGuesses = []
     
     for (let index = 0; index < concepts.length; index++) {
         concepts[index].connections.map((connection)=>{
@@ -23,19 +26,28 @@ export const Scratch = ()=>{
         )
     }
 
+
+
     // state array that handles the array of data to go on the tiles. 
     const[shuffledConcepts, setShuffledConcepts]  = useState(shuffle(conceptArray))
     
     const reshuffle = () =>{
-
-        let newArray = shuffle(conceptArray)
+    let newArray = shuffle(conceptArray)
         if (newArray)(
             setShuffledConcepts(newArray.slice())
         )}
 
     const submit = () =>{
-        console.log("submit ")
+           console.log(`submitted with an array of ${guessArray.length} guesses.`)
+           if(guessArray.length === 4){
+            
+           }
+           return;         
     }
+
+    // const evaluateGuess = (arr)=>{
+    //     for (let i = 0; i < guessArray.length; )
+    // }
 
     return(
         <div style={{
@@ -48,6 +60,7 @@ export const Scratch = ()=>{
                     <Tile
                         key={str}
                         text_string={str}
+                        guessArray = {guessArray}
                     />
                 
             ))}
@@ -59,17 +72,41 @@ export const Scratch = ()=>{
     )
 }
 
-export const Tile = ({text_string}) => {
+export const Tile = ({text_string, guessArray}) => {
 
     const [selected, setSelected] = useState(false)
+    
+    const handleClick = ()=>{
+        if(guessArray.length < 4){
+            if (!selected) {
+                guessArray.push(text_string)
+                setSelected(!selected)
+            }
+            else {
+                guessArray.splice(guessArray.findIndex((element)=> element = text_string), 1)
+                setSelected(!selected)
+            }}
+        else if (guessArray.length === 4) {
+            if(selected){
+                guessArray.splice(guessArray.findIndex((element)=> element = text_string), 1)
+                setSelected(!selected)
+            }
+            else{
+                return
+            }
+        }
+        console.log(guessArray)
+        return
+        }
+
 
     return(
         <div
-            onClick={()=>{setSelected(!selected)}}
+            onClick={handleClick}
             style={{
                 height: 50,
                 width: 100,
-                backgroundColor:  selected? "#243344" : "#332444",
+                backgroundColor:  selected? "#235534" : "#333444",
                 margin: "10px",
                 display: "flex",
                 justifyContent: "center",
