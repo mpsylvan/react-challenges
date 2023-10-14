@@ -23,7 +23,7 @@ export const Scratch = ()=>{
             conceptArray.push(
                     {
                         connection: connection.name,
-                        concept: concepts[index].name
+                        conceptName: concepts[index].name
                     })
 
         }
@@ -66,8 +66,9 @@ export const Scratch = ()=>{
                     <Tile
                         key={obj.connection}
                         text_string={obj.connection}
-                        concept = {obj.concept}
+                        conceptName = {obj.conceptName}
                         guessArray = {guessArray}
+                        concepts = {concepts}
                     />
                 
             ))}
@@ -79,7 +80,7 @@ export const Scratch = ()=>{
     )
 }
 
-export const Tile = ({text_string, concept,  guessArray}) => {
+export const Tile = ({text_string, conceptName, concepts,  guessArray}) => {
 
     const [selected, setSelected] = useState(false)
     
@@ -123,7 +124,7 @@ export const Tile = ({text_string, concept,  guessArray}) => {
         }}
         >
             <div>{text_string}</div>
-            {selected?<small>{concept}</small>: null }
+            {selected?<small>{conceptName}</small>: null }
         </div>
     )
 }
