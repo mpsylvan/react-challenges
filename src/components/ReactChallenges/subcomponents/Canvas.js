@@ -4,25 +4,24 @@ import { useRef } from "react";
 const Canvas = ({ draw, height, width }) => {
   const canvas = useRef();
 
-  const [n, setN] = useState(10);
   const [startX, setStartX] = useState(100);
   const [startY, setStartY] = useState(100);
-  const [endX, setendX] = useState(200);
+  const [endX, setEndX] = useState(200);
   const [endY, setEndY] = useState(100);
+
+
 
   useEffect(() => {
     const ctx = canvas.current.getContext("2d");
-
     ctx.clearRect(0, 0, 300, 200);
     ctx.beginPath();
-
-    ctx.arc(100, 90, 10, 0, 2 * Math.PI);
+    ctx.arc(150, 100, 5, 0, 2 * Math.PI);
+    // ctx.stroke();
+    ctx.
     ctx.stroke();
+  }, [startX, startY, endX, endY]);
 
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
-    ctx.stroke();
-  }, [startX, startY, endX, endY, n]);
+
 
   return (
     <>
